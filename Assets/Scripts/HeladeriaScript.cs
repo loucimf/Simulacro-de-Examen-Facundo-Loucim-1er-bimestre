@@ -18,7 +18,7 @@ public class HeladeriaScript : MonoBehaviour
     private int _minGrams = 250;
     private int _maxGrams = 3000;
 
-    private float pricePerGram = 1.25f;
+    private float _pricePerGram = 1.25f;
 
     void Start()
     {   
@@ -27,7 +27,7 @@ public class HeladeriaScript : MonoBehaviour
             return;
         }
 
-        float totalPrice = CalculatePrice(pricePerGram, gramsOfIcecream);
+        float totalPrice = CalculatePrice(_pricePerGram, gramsOfIcecream);
 
         if (_icecreamChosen == IcecreamOpts.FRU)
         {
@@ -40,11 +40,20 @@ public class HeladeriaScript : MonoBehaviour
 
     bool ValidateIcecream(int grams)
     {   
+
+        // no puedo validar el enum, porque no existe en Enum.isDefined()  (  no hace falta, but its nice (:  )
+
         if (grams < _minGrams || grams > _maxGrams)
         {
             Debug.Log("Cantidad de helado INVALIDA, debe ser menor a: " + _maxGrams + " y mayor a: " + _minGrams + "$");
             return false;
         }
+
+        // if (!Enum.isDefined(typeof(IcecreamOpts), _icecreamChosen))
+        //{
+        //  Debug.Log("Elegi un helado valido.")
+        //  return false;
+        //}
         return true;
     }
 
